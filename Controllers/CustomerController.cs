@@ -15,7 +15,7 @@ public class CustomerController : Controller
         var packages = _context.TourPackages.ToList();
         return View(packages);
     }
-
+     
     // GET: Book Package
     [HttpGet]
     public IActionResult Book(int id)
