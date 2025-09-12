@@ -1,0 +1,28 @@
+﻿@model TMS.Models.TourPackage
+
+@{
+    ViewData["Title"] = "Create Package";
+}
+
+<div class="container mt-4" style="max-width:500px;">
+    <h2>@ViewData["Title"]</h2>
+    <form asp-action="CreatePackage" method="post">
+        <div class="mb-3">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Price"></label>
+            <input asp-for="Price" type="number" min="0" class="form-control" required />
+        </div>
+        <div class="mb-3">
+            <label asp-for="ImageUrl"></label>
+            <input asp-for="ImageUrl" class="form-control" required />
+        </div>
+        <button type="submit" class="btn btn-success w-100">@ViewData["Title"]</button>
+    </form>
+</div>

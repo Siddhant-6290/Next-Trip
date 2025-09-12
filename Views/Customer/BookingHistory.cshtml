@@ -1,0 +1,69 @@
+﻿@model IEnumerable<TMS.Models.Booking>
+
+@{
+    ViewData["Title"] = "Booking History";
+}
+
+<div class="container mt-4">
+    <h2>Your Previous Bookings</h2>
+
+    @* Show error or refund messages *@
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+    @if (TempData["Refund"] != null)
+    {
+        <div class="alert alert-success">
+            Your booking was cancelled. Refund Amount: ₹@TempData["Refund"], amount will be reverted within 4 working days 
+        </div>
+    }
+
+    <table class="table table-striped shadow-sm">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Package</th>
+                <th>Date</th>
+                <th>Seats</th>
+                <th>Amount Paid</th>
+                <th>Confirmed On</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="@booking.TourPackage.ImageUrl"
+                             alt="@booking.TourPackage.Title"
+                             style="width:80px;height:60px;object-fit:cover;" />
+                    </td>
+                    <td>@booking.TourPackage.Title</td>
+                    <td>@booking.BookingDate.ToShortDateString()</td>
+                    <td>@booking.Seats</td>
+                    <td>₹@booking.AmountPaid</td>
+                    <td>@booking.ConfirmedOn?.ToShortDateString()</td>
+                    <td>@booking.Status.ToString()</td>   @* Shows Confirmed/Cancelled *@
+                    <td>
+                        @if (booking.Status == TMS.Models.BookingStatus.Confirmed
+                                            && booking.BookingDate > DateTime.Today.AddDays(2))
+                        {
+                            <form asp-action="CancelBooking" method="post" asp-route-id="@booking.Id">
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    Cancel
+                                </button>
+                            </form>
+                        }
+                        else if (booking.Status == TMS.Models.BookingStatus.Cancelled)
+                        {
+                            <span class="text-muted">Cancelled</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

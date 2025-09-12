@@ -1,0 +1,59 @@
+﻿@model Booking
+@{
+    var package = ViewData["Package"] as TourPackage;
+    ViewData["Title"] = "Book Package";
+}
+
+<div class="container mt-4" style="max-width:600px;">
+    <h3 class="mb-3">Booking: @package?.Title</h3>
+
+    <div class="card shadow-sm">
+        <img src="@package?.ImageUrl" alt="@package?.Title" class="card-img-top" style="height:250px; object-fit:cover;" />
+
+        <div class="card-body">
+            <p><strong>Price per person:</strong> ₹@package?.Price</p>
+            <p>@package?.Description</p>
+
+            <form asp-action="Book" method="post">
+                <input type="hidden" asp-for="TourPackageId" value="@package?.Id" />
+
+                @* <div class="mb-3">
+                    <label asp-for="BookingDate" class="form-label"></label>
+                    <input asp-for="BookingDate" type="date" class="form-control" required />
+                </div> *@
+
+                <div class="mb-3">
+                    <label asp-for="BookingDate" class="form-label"></label>
+                    <input asp-for="BookingDate" type="date" class="form-control"
+                           value="@Model.BookingDate.ToString("yyyy-MM-dd")"
+                           min="@DateTime.Today.ToString("yyyy-MM-dd")" required />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Seats" class="form-label"></label>
+                    <input asp-for="Seats" type="number" min="1" class="form-control" id="seatsInput" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Total Amount</label>
+                    <input type="text" id="totalAmount" class="form-control" readonly value="₹0" />
+                </div>
+
+                <button type="submit" class="btn btn-success w-100">Confirm Booking</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const pricePerSeat = @package?.Price;
+        const seatsInput = document.getElementById("seatsInput");
+        const totalAmountInput = document.getElementById("totalAmount");
+
+        seatsInput.addEventListener("input", () => {
+            let seats = parseInt(seatsInput.value) || 0;
+            totalAmountInput.value = "₹" + (seats * pricePerSeat);
+        });
+    </script>
+}

@@ -1,0 +1,47 @@
+﻿@model IEnumerable<TourPackage>
+@{
+    ViewData["Title"] = "Tour Packages";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Find your next chilling spot </h2>
+
+    @* Search Form pointing to CustomerController *@
+    <form asp-controller="Customer" asp-action="Search" method="get" class="d-flex mb-4">
+        <input type="text" name="query"
+               value="@(ViewContext.HttpContext.Request.Query["query"])"
+               class="form-control me-2"
+               placeholder="Search packages..." />
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    <div class="mb-3">
+        <a asp-action="BookingHistory" asp-controller="Customer" class="btn btn-outline-primary">
+            Booking History
+        </a>
+    </div>
+
+    <div class="row">
+        @if (!Model.Any())
+        {
+            <div class="alert alert-warning">No packages found matching your search.</div>
+        }
+        else
+        {
+            @foreach (var package in Model)
+            {
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100 shadow-sm">
+                        <img src="@package.ImageUrl" alt="@package.Title" class="card-img-top" style="height:200px; object-fit:cover;" />
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">@package.Title</h5>
+                            <p class="card-text text-muted">@package.Description</p>
+                            <p class="card-text fw-bold">Price: ₹@package.Price</p>
+                            <a asp-action="Book" asp-route-id="@package.Id" class="btn btn-primary mt-auto w-100">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

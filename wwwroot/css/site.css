@@ -1,0 +1,73 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+
+.next-trip-highlight {
+    background-color: #f8d7da; /* light red */
+    border-radius: 8px; /* rounded square */
+    padding: 6px 12px; /* some spacing */
+    margin-left: 5px; /* spacing from other items */
+    font-weight: 500; /* make text slightly bold */
+    transition: 0.3s ease; /* smooth hover */
+}
+
+    .next-trip-highlight:hover {
+        background-color: #f5c2c7; /* slightly darker red on hover */
+        text-decoration: none; /* remove underline */
+    }
+
+
+
+
+/*Packages page */
+.card {
+    transition: all 0.3s ease; /* smooth hover effect */
+}
+
+    .card:hover {
+        border: 1px solid #ff6b6b; /* light red border */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* deeper shadow */
+        transform: translateY(-5px); /* slight elevation */
+    }
+
+
+/*Login background*/
+.login-page {
+    background-image: url('/images/login-bg.jpg'); /* path to your image */
+    background-size: cover; /* make it cover the whole page */
+    background-position: center; /* center the image */
+    background-repeat: no-repeat;
+    height: 100vh; /* full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    background-color: rgba(255, 255, 255, 0.85); /* optional: semi-transparent box */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    width: 100%;
+    max-width: 400px;
+}

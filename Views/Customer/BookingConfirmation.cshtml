@@ -1,0 +1,17 @@
+﻿@model Booking
+@{
+    ViewData["Title"] = "Booking Confirmation";
+}
+
+<div class="container mt-4" style="max-width:500px;">
+    <div class="card shadow-sm">
+        <img src="@Model.TourPackage.ImageUrl" alt="@Model.TourPackage.Title" class="card-img-top" style="max-height:200px;object-fit:cover;" />
+        <div class="card-body">
+            <h3 class="card-title text-success">Booking Confirmed!</h3>
+            <p><strong>Package:</strong> @Model.TourPackage.Title</p>
+            <p><strong>Date:</strong> @Model.BookingDate.ToShortDateString()</p>
+            <p><strong>Seats:</strong> @Model.Seats</p>
+            <p><strong>Total Amount Paid:</strong> ₹@Model.AmountPaid</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+﻿@model TMS.Models.Booking
+
+@{
+    ViewData["Title"] = "Refund Confirmation";
+}
+
+<div class="container mt-4">
+    <h2>Booking Cancelled</h2>
+    <p>Your booking for <strong>@Model.TourPackage.Title</strong> has been successfully cancelled.</p>
+    <p>You will receive a refund of <strong>@TempData["Refund"]</strong> within 5-7 business days.</p>
+    <a asp-action="BookingHistory" class="btn btn-primary">Back to History</a>
+</div>
