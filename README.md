@@ -28,6 +28,7 @@ This project is for learning purposes and demonstrates user authentication, role
 ---
 
 ## 📂 Project Structure
+```
 TMS/
 ├── Controllers/ # MVC Controllers (Account, TourPackage, etc.)
 ├── Models/ # EF Core Models (User, Booking, Package)
